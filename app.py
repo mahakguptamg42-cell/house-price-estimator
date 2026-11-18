@@ -376,10 +376,17 @@ with tab2:
             color_discrete_sequence=['#1e3a8a', '#0284c7', '#059669']
         )
         fig_bar.update_traces(textposition='outside')
-        fig_bar.update_layout(
-            showlegend=False,
-            margin=dict(l=20, r=20, t=50, b=20),
-            yaxis=dict(title='Valuation (₹ Lakhs)')
+        fig.update_layout(
+            hovermode="x unified",
+            legend=dict(
+                orientation="h", 
+                yanchor="top", 
+                y=-0.2, 
+                xanchor="center", 
+                x=0.5
+            ),
+            margin=dict(l=20, r=20, t=60, b=80),
+            title=dict(font=dict(size=16))
         )
         st.plotly_chart(fig_bar, use_container_width=True)
     elif HAS_ALTAIR:
