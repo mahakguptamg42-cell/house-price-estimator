@@ -324,7 +324,6 @@ with tab1:
             textposition="top center",
             marker=dict(size=14, color='#dc2626', symbol='diamond', line=dict(width=2, color='white'))
         ))
-        # Fixed layout spacing to prevent title/legend overlap
         fig.update_layout(
             hovermode="x unified",
             legend=dict(orientation="h", yanchor="bottom", y=1.08, xanchor="center", x=0.5),
@@ -388,7 +387,7 @@ with tab2:
             x=alt.X('City Tier:N', title='City Tier'),
             y=alt.Y('price_lakh:Q', title='Valuation (₹ Lakhs)'),
             color=alt.Color('City Tier:N', legend=None),
-            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'], 'Rate (₹/sqft)']
+            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f')]
         ).properties(height=380)
         st.altair_chart(bar_chart, use_container_width=True)
         
