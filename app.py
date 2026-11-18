@@ -326,9 +326,16 @@ with tab1:
         ))
         fig.update_layout(
             hovermode="x unified",
-            legend=dict(orientation="h", yanchor="bottom", y=1.08, xanchor="center", x=0.5),
-            margin=dict(l=20, r=20, t=80, b=20),
-            title=dict(x=0.0, y=0.95)
+            legend=dict(
+                orientation="h", 
+                yanchor="top", 
+                y=-0.25, 
+                xanchor="center", 
+                x=0.5,
+                title=dict(text="")
+            ),
+            margin=dict(l=20, r=20, t=70, b=90),
+            title=dict(font=dict(size=16), y=0.95, x=0.0)
         )
         st.plotly_chart(fig, use_container_width=True)
     elif HAS_ALTAIR:
@@ -376,18 +383,10 @@ with tab2:
             color_discrete_sequence=['#1e3a8a', '#0284c7', '#059669']
         )
         fig_bar.update_traces(textposition='outside')
-        fig.update_layout(
-            hovermode="x unified",
-            legend=dict(
-                orientation="h", 
-                yanchor="top", 
-                y=-0.25, 
-                xanchor="center", 
-                x=0.5,
-                title=dict(text="")  # Yeh "Tier Label" wala text bilkul gayab kar dega!
-            ),
-            margin=dict(l=20, r=20, t=70, b=90),
-            title=dict(font=dict(size=16), y=0.95, x=0.0)
+        fig_bar.update_layout(
+            showlegend=False,
+            margin=dict(l=20, r=20, t=50, b=20),
+            yaxis=dict(title='Valuation (₹ Lakhs)')
         )
         st.plotly_chart(fig_bar, use_container_width=True)
     elif HAS_ALTAIR:
