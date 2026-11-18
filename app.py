@@ -381,12 +381,13 @@ with tab2:
             legend=dict(
                 orientation="h", 
                 yanchor="top", 
-                y=-0.2, 
+                y=-0.25, 
                 xanchor="center", 
-                x=0.5
+                x=0.5,
+                title=dict(text="")  # Yeh "Tier Label" wala text bilkul gayab kar dega!
             ),
-            margin=dict(l=20, r=20, t=60, b=80),
-            title=dict(font=dict(size=16))
+            margin=dict(l=20, r=20, t=70, b=90),
+            title=dict(font=dict(size=16), y=0.95, x=0.0)
         )
         st.plotly_chart(fig_bar, use_container_width=True)
     elif HAS_ALTAIR:
