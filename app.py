@@ -25,7 +25,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling for Professional Dashboard Look
+# Custom Styling for Ultra-Clean Professional UI
 st.markdown("""
 <style>
     .main-title {
@@ -36,12 +36,12 @@ st.markdown("""
     }
     .sub-title {
         font-size: 1.05rem;
-        color: #64748b;
+        color: #475569;
         margin-bottom: 1.5rem;
     }
     .metric-card {
         background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        color: white;
+        color: white !important;
         padding: 28px;
         border-radius: 18px;
         box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
@@ -51,7 +51,7 @@ st.markdown("""
         font-size: 0.95rem;
         text-transform: uppercase;
         letter-spacing: 1.2px;
-        opacity: 0.9;
+        color: #e2e8f0 !important;
         font-weight: 600;
     }
     .metric-value-cr {
@@ -59,39 +59,41 @@ st.markdown("""
         font-weight: 800;
         line-height: 1.1;
         margin: 8px 0;
+        color: #ffffff !important;
     }
     .metric-value-lakh {
         font-size: 1.35rem;
         font-weight: 600;
-        opacity: 0.95;
+        color: #f1f5f9 !important;
     }
     .info-badge {
         display: inline-block;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.2);
         padding: 6px 14px;
         border-radius: 20px;
         font-size: 0.9rem;
         margin-top: 10px;
+        color: #ffffff !important;
         font-weight: 500;
     }
     .stat-box {
         background-color: #ffffff;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #cbd5e1;
         border-radius: 14px;
         padding: 18px;
         text-align: center;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
     .stat-title {
-        color: #64748b;
+        color: #475569 !important;
         font-size: 0.85rem;
-        font-weight: 600;
+        font-weight: 700;
         text-transform: uppercase;
     }
     .stat-val {
-        color: #0f172a;
+        color: #0f172a !important;
         font-size: 1.4rem;
-        font-weight: 700;
+        font-weight: 800;
         margin-top: 6px;
     }
 </style>
@@ -192,7 +194,6 @@ input_data = pd.DataFrame([{
     'parking': parking_slots
 }])
 
-# Calculation without any visible warning
 try:
     if model is not None:
         pred_lakh = float(model.predict(input_data)[0])
@@ -323,10 +324,12 @@ with tab1:
             textposition="top center",
             marker=dict(size=14, color='#dc2626', symbol='diamond', line=dict(width=2, color='white'))
         ))
+        # Fixed layout spacing to prevent title/legend overlap
         fig.update_layout(
             hovermode="x unified",
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-            margin=dict(l=20, r=20, t=50, b=20)
+            legend=dict(orientation="h", yanchor="bottom", y=1.08, xanchor="center", x=0.5),
+            margin=dict(l=20, r=20, t=80, b=20),
+            title=dict(x=0.0, y=0.95)
         )
         st.plotly_chart(fig, use_container_width=True)
     elif HAS_ALTAIR:
@@ -376,7 +379,7 @@ with tab2:
         fig_bar.update_traces(textposition='outside')
         fig_bar.update_layout(
             showlegend=False,
-            margin=dict(l=20, r=20, t=30, b=20),
+            margin=dict(l=20, r=20, t=50, b=20),
             yaxis=dict(title='Valuation (₹ Lakhs)')
         )
         st.plotly_chart(fig_bar, use_container_width=True)
@@ -385,7 +388,7 @@ with tab2:
             x=alt.X('City Tier:N', title='City Tier'),
             y=alt.Y('price_lakh:Q', title='Valuation (₹ Lakhs)'),
             color=alt.Color('City Tier:N', legend=None),
-            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'), 'Rate (₹/sqft)']
+            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'], 'Rate (₹/sqft)']
         ).properties(height=380)
         st.altair_chart(bar_chart, use_container_width=True)
         
