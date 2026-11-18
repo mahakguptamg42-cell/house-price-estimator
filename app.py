@@ -99,7 +99,11 @@ def load_trained_model():
     model_paths = ['best_indian_house_model.pkl', 'model.pkl']
     for p in model_paths:
         if os.path.exists(p):
-            return joblib.load(p)
+            try:
+                return joblib.load(p)
+            except Exception as e:
+                st.error(f"❌ Error loading model file `{p}`: {e}")
+                return None
     return None
 
 model = load_trained_model()
@@ -190,7 +194,7 @@ st.markdown('<div class="main-title">🏡 Real-Time Indian House Price Estimator
 st.markdown('<div class="sub-title">Instant Machine Learning Valuation for Residential Properties across Indian Metro and Tier Cities</div>', unsafe_allow_html=True)
 
 if model is None:
-    st.error("⚠️ Model file (`best_indian_house_model.pkl`) not found. Please run `train.py` first to generate the model artifact.")
+    st.error("⚠️ Model file (`best_indian_house_model.pkl` or `model.pkl`) not found or failed to unpickle. Please check your GitHub repository files.")
     st.stop()
 
 # Prepare Input DataFrame
@@ -391,7 +395,7 @@ with tab2:
             x=alt.X('City Tier:N', title='City Tier'),
             y=alt.Y('price_lakh:Q', title='Valuation (₹ Lakhs)'),
             color=alt.Color('City Tier:N', legend=None),
-            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'), 'Rate (₹/sqft)']
+            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'], 'Rate (₹/sqft)']
         ).properties(height=380)
         st.altair_chart(bar_chart, use_container_width=True)
     else:
