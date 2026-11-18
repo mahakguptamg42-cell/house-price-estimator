@@ -401,7 +401,7 @@ with tab2:
             x=alt.X('City Tier:N', title='City Tier'),
             y=alt.Y('price_lakh:Q', title='Valuation (₹ Lakhs)'),
             color=alt.Color('City Tier:N', legend=None),
-            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'], 'Rate (₹/sqft)']
+            tooltip=['City Tier', alt.Tooltip('price_lakh:Q', format='.2f'), 'Rate (₹/sqft)']
         ).properties(height=380)
         st.altair_chart(bar_chart, use_container_width=True)
     else:
